@@ -1,0 +1,35 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Категории{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Категории</h1>
+
+<a href="{% url 'create_category' %}" class="btn btn-success mb-3">Добавить категорию</a>
+
+{% if categories %}
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Название</th>
+                <th>Количество товаров</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.product_count }}</td>
+                    <td>
+                        <a href="{% url 'update_category' category.pk %}" class="btn btn-warning btn-sm">Редактировать</a>
+                        <a href="{% url 'delete_category' category.pk %}" class="btn btn-danger btn-sm">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="alert alert-warning">Категории пока не созданы.</div>
+{% endif %}
+{% endblock %}

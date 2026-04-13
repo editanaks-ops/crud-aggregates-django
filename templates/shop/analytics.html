@@ -1,0 +1,49 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Аналитика{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Аналитика каталога</h1>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm p-3">
+            <h4>Общая статистика</h4>
+            <p><strong>Общее количество товаров:</strong> {{ overall_stats.total_products }}</p>
+            <p><strong>Общая стоимость товаров:</strong> {{ overall_stats.total_price }}</p>
+            <p><strong>Средняя цена:</strong> {{ overall_stats.avg_price }}</p>
+            <p><strong>Минимальная цена:</strong> {{ overall_stats.min_price }}</p>
+            <p><strong>Максимальная цена:</strong> {{ overall_stats.max_price }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm p-3">
+    <h4 class="mb-3">Статистика по категориям</h4>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Категория</th>
+                <th>Количество товаров</th>
+                <th>Общая стоимость</th>
+                <th>Средняя цена</th>
+                <th>Минимальная цена</th>
+                <th>Максимальная цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in category_stats %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.product_count }}</td>
+                    <td>{{ category.total_price }}</td>
+                    <td>{{ category.avg_price }}</td>
+                    <td>{{ category.min_price }}</td>
+                    <td>{{ category.max_price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
